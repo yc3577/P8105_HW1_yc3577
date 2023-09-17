@@ -1,0 +1,68 @@
+---
+title: "P8105_hw1_yc3577"
+author: "Yimeng Cai"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+library(moderndive)
+library(tidyverse)
+data("early_january_weather")
+```
+
+Problem 1:
+```{r}
+variables = ls(early_january_weather)
+variables
+# The variables are 'origin', 'year', 'month', 'day', 'hour', 'temp', 'dewp', 'humid', 'wind_dir', 'wind_speed', 'wind_gust', 'precip', 'pressure', 'visib', and 'time_hour'.
+
+rownum = nrow(early_january_weather)
+colnum = ncol(early_january_weather)
+size = c(rownum, colnum)
+size
+# The size of the dataset is (358, 15), 358 rows and 15 columns.
+
+tempmean = mean(early_january_weather$temp)
+tempmean
+# The mean of the temperature is 39.58212 degrees.
+
+plot=ggplot(early_january_weather, aes(time_hour, temp, color = humid))+geom_point()
+plot
+# The scatter plot shows the daily temperature fluctuates up and down through the time period from 2023-01-01 to 2023-01-15. The day time temp has a high value at noon and low value at night. The pattern is fluctuating while it is a relatively positive association between temperature and time in these 15 days. The later the date, the higher the temperature is. The color of dot shows a humidity weather around 01-12 to 01-14, and other times are relatively dry.
+ggsave("scatter_plot_temp.pdf", height = 5, width = 5)
+```
+
+Problem 2:
+```{r}
+df = tibble(
+  ransample = rnorm(10),
+  logvec = ransample > 0,
+  charvec = c('a','b','c','d','e','f','g','h','i','j'),
+  facvec = factor(c('high','low','median','median','median','low','high','high','low','high'))
+)
+df
+meanran = mean(pull(df,ransample))
+meanran
+meanlog = mean(pull(df, logvec))
+meanlog
+meancha = mean(pull(df, charvec))
+meancha
+meanfac = mean(pull(df, facvec))
+meanfac
+# After taking the mean, both the mean of factor vector and character vector don't work, since they are not numerical, and random sample mean is 0.0173047, and logical vector mean is 0.4.
+```
+
+
+```{r}
+newlogvec = as.numeric(df$logvec)
+newlogvec
+newcharvec = as.numeric(df$charvec)
+newcharvec
+newfacvec = as.numeric(df$facvec)
+newfacvec
+
+#  From the as.numeric function, we can see that logical vector and factor vector can be transformed into numerical vectors, while the character vectors cannot. Since the logical vectors have only two values true and false and the R will assume true is 1 and false is 0. So it can convert the logical vectors to 1 or 0 numbers. The factor variables can be transformed into data based on the numbers of the levels of the factor. For instance, the first element is high in factor vectors, and it is assigned 1 as default, and the second element assigned 2 as default, and the repeated element same as the 1st one will be also assigned as 1. However, the character vectors does not have similarities or orders, so the R cannot assign a number to quantify it. That is why character vector does not have the mean, as it cannot be transformed into numerical vectors. 
+
+```
+
