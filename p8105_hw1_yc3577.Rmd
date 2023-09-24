@@ -1,7 +1,7 @@
 ---
 title: "P8105_hw1_yc3577"
 author: "Yimeng Cai"
-date: "`r Sys.Date()`"
+date: "09/23/23"
 output: github_document
 ---
 
@@ -16,6 +16,21 @@ Problem 1:
 variables = ls(early_january_weather)
 variables
 # The variables are 'origin', 'year', 'month', 'day', 'hour', 'temp', 'dewp', 'humid', 'wind_dir', 'wind_speed', 'wind_gust', 'precip', 'pressure', 'visib', and 'time_hour'.
+#The explainations are below:
+#Year is 2013 which means all data is happened in 2013 year. 
+#Month is 1 which means all data is happened in Jan 2013.
+#Day has a value from 1 to 15, which means all data happened within the 15 days.
+#Hour has a value from 0 to 23, which means that all data happened within the 23 hours.
+#Temperature has a value from 24.08 to 57.92, with a mean of 39.58.
+#Dewp has a value from 8.96 to 53.06.
+#Humid has a value from 32.86 to 100.
+#Wind_direction has a value from 0 to 360, which means 360 degrees of directions of winds..
+#Wind_speed has a value from 0 to 24.166.
+#Wind_gust has a value from 16.11 to 31.07, and it has multiple null values.
+#Precip has a value from 0 to 0.19, which means the precipitation amount.
+#Pressure has a value from 1011 to 1034, and it also has multiple null values..
+#Visible has a value from 0.12 to 10.
+#Time_hour has a value from 2013-01-01 01:00:00.00 to 2013-01-15 23:00:00.00.
 
 rownum = nrow(early_january_weather)
 colnum = ncol(early_january_weather)
